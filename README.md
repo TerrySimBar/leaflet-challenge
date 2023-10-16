@@ -4,6 +4,7 @@
 A project that uses JavaScript with Leaflet and HTML to visualize earthquake data.
 <br>
 <br>
+Click for deployment: https://terrysimbar.github.io/leaflet-challenge/
 <br> 
 <img src="Images/earthquake_layer.png" width="1000">   
 
