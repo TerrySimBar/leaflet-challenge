@@ -72,7 +72,7 @@ async function Visualize() {
 
   legend.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'info legend');
-    var grades = [-10, 30, 50, 70, 90];
+    var grades = [0, 50, 70, 100, 300, 400];
     var colors = ['#FF5733', '#FF8333', '#FFAE33', '#FFD733', '#FFF333', '#D7FF33'];
 
     div.innerHTML += "<h4 style='margin:4px'>Earthquake Depth</h4>";
@@ -121,9 +121,9 @@ boundariesLayer.addTo(map);
   L.control.layers(baseMaps, overlayMaps).addTo(map);
 
   // Event listener for base map changes  
-  document.querySelectorAll('.base-map-radio input').forEach(function (input) {
+  document.querySelectorAll('.base-map-select input').forEach(function (input) {
     input.addEventListener('change', function () {
-      var selectedBaseMap = document.querySelector('.base-map-radio input:checked').value;
+      var selectedBaseMap = document.querySelector('.base-map-select input:checked').value;
       baseMaps[selectedBaseMap].addTo(map);
       Object.values(baseMaps).forEach(function (layer) {
         if (layer !== baseMaps[selectedBaseMap]) {
