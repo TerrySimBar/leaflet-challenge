@@ -23,14 +23,14 @@ This JavaScript with Leaflet project reads in JSON earthquake and tectonic plate
 
 
 #### Features
-- Read in JSON data from URLs.
+- Use D3 to read in JSON data from URLs.
 
 - Create interactive visualizations which include options for toggling between map layers and clicking markers to get earthquake information. 
 
 <br>
 
 #### Requirements & Dependencies
-This project does not use external dependencies managed through npm or yarn. Instead, all the necessary JavaScript libraries, including Leaflet, are included directly in the accompanying HTML file using `<script>` tags. These libraries are either hosted via Content Delivery Networks (CDNs) or included locally.
+This project does not use external dependencies managed through npm or yarn. Instead, all the necessary JavaScript libraries, including D3 and Leaflet, are included directly in the accompanying HTML file using `<script>` tags. These libraries are either hosted via Content Delivery Networks (CDNs) or included locally.
 <br>
 
 ---
@@ -48,7 +48,7 @@ The HTML file (`index.html`) in this project is structured as follows:
 
 4. **Body Section** `<body>` contains the main content of the webpage, including the map elements.
 
-5. **Map Structure**: The interactive map is structured within the `<body>`using `<script>` tags for Javacript and Leaflet.
+5. **Map Structure**: The interactive map is structured within the `<body>`using `<script>` tags for Javacript, D3 and Leaflet.
 
 6. **JavaScript File** A JavaScript file is included at the end of the `<body>` to handle interactivity and a link to the `logic.js` file that contains custom code for the map visualization.
 
@@ -58,11 +58,11 @@ Please refer to the accompanying `index.html` file for the complete code.
 #### JavaScript Setup 
 The `logic.js` file is used to create a map visualization with layer and markers. Here's an overview of its key functionalities:
 
-1. **Define the URLs for JSON Data**: The `const url` and `const url2` variables are used to store the URLs of the JSON earthquake and tectonic plates data. 
+1. **Define the URLs for JSON Data**: The `const url` and `const url2` variables are used to store the URLs of the JSON earthquake and tectonic plates data. The earthquake data in this project uses records from the past 7 days, while the tectonic plates data is static.  Developers have flexibility to choose earthquake data for various time frames using this link: https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
 
-2. **Use `async` and `await` to fetch JSON Data**: The `async` and `await` methods are used to fetch the JSON data from the URLs and store them in the `earthquakeData` and `boundariesData` variables.
+2. **Fetch JSON Data**: The `async` and `await` methods are used with D3 to fetch the JSON data from the URLs and store them in the `earthquakeData` and `boundariesData` variables.
 
-3. **Format the interactive Map**: The `L.map`, `L.tileLayer`, `L.LayerGroup`, `.forEach`, `L.control`, amd other methods are used to setup the map and legend. The legend uses a graduation of colors from bright red for the earthquakes nearest to Earth's surface, to light green for the deepest earthquakes.
+3. **Format the interactive Map**: The `L.map`, `L.tileLayer`, `L.LayerGroup`, `.forEach`, `L.control`, amd other methods are used to setup the map and legend. The legend uses a graduation of colors from light green for the earthquakes nearest to Earth's surface, to red for the deepest earthquakes.
 
 4. **Format Circle Markers** `L.circleMarker` is used to create circle markers for each earthquake location. The `getColor` function is used to style the markers based on the magnitude of the earthquake, and the `bindPopup`method adds a popup with earthquake data for each marker.   
 

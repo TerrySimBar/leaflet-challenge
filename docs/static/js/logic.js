@@ -6,8 +6,22 @@ const url2 = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/Geo
 
 // Function to visualize the earthquake and tectonic plate boundaries data  
 async function Visualize() {
-  let earthquakeData = await (await fetch(url)).json();
-  let boundariesData = await (await fetch(url2)).json();
+
+  // Fetch earthquake data
+  let earthquakeData;
+  await d3.json(url)
+    .then(data => {
+      earthquakeData = data;
+    })
+
+
+  // Fetch tectonic plate boundaries data
+  let boundariesData;
+  await d3.json(url2)
+    .then(data => {
+      boundariesData = data;
+    })
+  
 
   var map = L.map('map').setView([0, 0], 2);
 
@@ -39,6 +53,7 @@ async function Visualize() {
   earthquakeData.features.forEach(function (earthquake) {
     var magnitude = earthquake.properties.mag;
     var depth = earthquake.geometry.coordinates[2];
+    var location = earthquake.properties.place; 
 
     // Define the marker size and color based on magnitude and depth
     var markerSize = magnitude * 5;
@@ -56,8 +71,10 @@ async function Visualize() {
 
     // Add a popup with earthquake information
     marker.bindPopup(
+      "Location: " + location + "<br>" +  
       "Magnitude: " + magnitude.toFixed(1) + "<br>" +
-      "Depth: " + depth.toFixed(1) + " km"
+      "Depth: " + depth.toFixed(1) + " km" 
+     
     );
 
     // Add the marker to the earthquake layer
@@ -72,8 +89,8 @@ async function Visualize() {
 
   legend.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'info legend');
-    var grades = [0, 50, 70, 100, 300, 400];
-    var colors = ['#FF5733', '#FF8333', '#FFAE33', '#FFD733', '#FFF333', '#D7FF33'];
+    var grades = [-10, 11, 30, 50, 70, 90];
+    var colors = ['#D7FF33', '#FFF333', '#FFD733', '#FFAE33', '#FF8333', '#FF5733'];
 
     div.innerHTML += "<h4 style='margin:4px'>Earthquake Depth</h4>";
     for (var i = 0; i < grades.length; i++) {
@@ -89,7 +106,8 @@ async function Visualize() {
 
   // Determine marker color based on depth
   function getColor(depth) {
-    var colors = ['#FF5733', '#FF8333', '#FFAE33', '#FFD733', '#FFF333', '#D7FF33'];
+    var colors = ['#D7FF33', '#FFF333', '#FFD733', '#FFAE33', '#FF8333', '#FF5733'];
+
     for (var i = 0; i < colors.length; i++) {
       if (depth < (i + 1) * 20) {
         return colors[i];
