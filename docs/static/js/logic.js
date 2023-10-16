@@ -106,7 +106,11 @@ async function Visualize() {
   };
 
   // Set the default base map
-  osmLayer.addTo(map);
+  satelliteLayer.addTo(map);
+
+  // Add earthquake markers and tectonic plate boundaries to the map
+earthquakesLayer.addTo(map);
+boundariesLayer.addTo(map);
 
   // Create a layer control for base maps and overlay layers
   var overlayMaps = {
