@@ -4,8 +4,6 @@
 A project that uses JavaScript with Leaflet and HTML to visualize earthquake data.
 <br>
 <br>
-<br>
-<img src="Images/earthquake_simple.png" width="1000"> 
 <br> 
 <img src="Images/earthquake_layer.png" width="1000">   
 
