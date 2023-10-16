@@ -4,7 +4,6 @@
 A project that uses JavaScript with Leaflet and HTML to visualize earthquake data.
 <br>
 <br>
-Click this link for deployment: https://terrysimbar.github.io/belly-button-challenge/
 <br>
 <img src="Images/earthquake_simple.png" width="1000"> 
 <br> 
